@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
 ## Langsmith tracking
 os.environ["LANGCHAIN_TRACING_V2"]="true"
 os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
@@ -26,8 +26,10 @@ prompt=ChatPromptTemplate.from_messages(
 st.title('Langchain Demo With LLAMA2 API')
 input_text=st.text_input("Search the topic u want")
 
-# ollama LLAma2 LLm 
-llm=Ollama(model="llama3.2")  # Changed to "llama2"
+# openAI LLm 
+llm=ChatOpenAI(model="gpt-3.5-turbo")
+# # ollama LLAma2 LLm 
+# llm=Ollama(model="llama3.2")  # Changed to "llama2"
 output_parser=StrOutputParser()
 chain=prompt|llm|output_parser
 
