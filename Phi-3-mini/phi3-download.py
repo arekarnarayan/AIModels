@@ -6,18 +6,18 @@ import os
 from huggingface_hub import snapshot_download
 from pathlib import Path
 
-def download_phi3_mini():
+def download_model():
     # Create a directory for the model
-    model_dir = Path("models/phi-3-mini")
+    model_dir = Path("models/TinyLlama")
     model_dir.mkdir(parents=True, exist_ok=True)
     
-    print(f"Downloading Phi-3-mini to {model_dir.absolute()}...")
+    print(f"Downloading model to {model_dir.absolute()}...")
     
     # Download the model from Hugging Face
     # The instruct version is optimized for conversation
     try:
         snapshot_download(
-            repo_id="microsoft/Phi-3-mini-4k-instruct",
+            repo_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
             local_dir=str(model_dir),
             # Optional: include specific patterns to download
             # ignore_patterns=["*.safetensors.index.json"],
@@ -37,7 +37,7 @@ def download_phi3_mini():
     return model_dir
 
 if __name__ == "__main__":
-    model_path = download_phi3_mini()
+    model_path = download_model()
     print(f"\nModel download complete. Path: {model_path}")
     print("\nNote: If you encountered any authentication errors, try logging in:")
     print("  $ huggingface-cli login")
